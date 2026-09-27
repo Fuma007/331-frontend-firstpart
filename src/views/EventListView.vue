@@ -10,8 +10,9 @@ const router = useRouter()
 
 const events = ref<Event[] | null>(null)
 const totalEvents = ref<number>(0)
+const perPage = 1 // temporarily 1 for testing; change back to 3 when done
 const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvents.value / 3)
+  const totalPages = Math.ceil(totalEvents.value / perPage)
   return page.value < totalPages
 })
 const props = defineProps({
@@ -26,9 +27,9 @@ const keyword = ref('')
 function updateKeyword() {
   let queryFunction
   if (keyword.value === '') {
-    queryFunction = EventService.getEvents(3, page.value)
+    queryFunction = EventService.getEvents(perPage, page.value)
   } else {
-    queryFunction = EventService.getEventsByKeyword(keyword.value, 3, page.value)
+    queryFunction = EventService.getEventsByKeyword(keyword.value, perPage, page.value)
   }
   queryFunction
     .then((response) => {
@@ -97,4 +98,3 @@ onMounted(() => {
   text-align: right;
 }
 </style>
-
