@@ -10,7 +10,7 @@ const router = useRouter()
 
 const events = ref<Event[] | null>(null)
 const totalEvents = ref<number>(0)
-const perPage = 1 // temporarily 1 for testing; change back to 3 when done
+const perPage = 3
 const hasNextPage = computed(() => {
   const totalPages = Math.ceil(totalEvents.value / perPage)
   return page.value < totalPages
