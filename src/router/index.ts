@@ -12,6 +12,7 @@ import nProgress from 'nprogress'
 import { useEventStore } from '@/stores/event'
 import AddEventView from '@/views/event/EventFormView.vue'
 import AddOrganizerView from '@/views/organizer/OrganizerFormView.vue'
+import AuctionItemListView from '@/views/AuctionItemListView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -35,6 +36,12 @@ const router = createRouter({
       path: '/add-organizer',
       name: 'add-organizer',
       component: AddOrganizerView,
+    },
+    {
+      path: '/auction-items',
+      name: 'auction-item-list-view',
+      component: AuctionItemListView,
+      props: (route) => ({ page: parseInt(route.query.page as string) || 1 }),
     },
     {
       path: '/event/:id',
