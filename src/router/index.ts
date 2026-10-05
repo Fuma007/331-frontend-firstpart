@@ -14,6 +14,7 @@ import AddEventView from '@/views/event/EventFormView.vue'
 import AddOrganizerView from '@/views/organizer/OrganizerFormView.vue'
 import AuctionItemListView from '@/views/AuctionItemListView.vue'
 import OrganizerDetailView from '@/views/organizer/OrganizerDetailView.vue'
+import OrganizerListView from '@/views/organizer/OrganizerListView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -49,6 +50,11 @@ const router = createRouter({
       name: 'organizer-detail-view',
       component: OrganizerDetailView,
       props: true,
+    },
+    {
+      path: '/organizers',
+      name: 'organizer-list-view',
+      component: OrganizerListView,
     },
     {
       path: '/event/:id',

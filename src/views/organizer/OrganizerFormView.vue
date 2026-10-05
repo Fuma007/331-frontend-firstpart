@@ -4,20 +4,17 @@ import { ref, watch } from 'vue'
 import OrganizerService from '@/services/OrganizerService'
 import { useRouter } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
-import ImageUpload from '@/components/ImageUpload.vue' // ADDED
+import ImageUpload from '@/components/ImageUpload.vue'
 
 const organizer = ref<Organizer>({
   id: null,
-  organizerName: '',
-  address: '',
+  name: '',
   image: '',
 })
 
-// ADDED: the uploader works with an array, but the organizer keeps only 1 image
 const images = ref<string[]>([])
 watch(images, (newImages) => {
   if (newImages.length > 1) {
-    // only 1 image allowed: keep the most recent one
     images.value = newImages.slice(-1)
     return
   }
@@ -30,10 +27,8 @@ const store = useMessageStore()
 function saveOrganizer() {
   OrganizerService.saveOrganizer(organizer.value)
     .then((response) => {
-      router.push({ name: 'event-list-view' })
-      store.updateMessage(
-        'You are successfully add a new organizer: ' + response.data.organizationName,
-      )
+      router.push({ name: 'organizer-detail-view', params: { id: response.data.id } })
+      store.updateMessage('You are successfully add a new organizer: ' + response.data.name)
       setTimeout(() => {
         store.resetMessage()
       }, 3000)
@@ -50,21 +45,12 @@ function saveOrganizer() {
     <form @submit.prevent="saveOrganizer">
       <label class="block text-gray-500 font-bold">Organization name</label>
       <input
-        v-model="organizer.organizerName"
+        v-model="organizer.name"
         type="text"
         placeholder="Organization name"
         class="h-13 w-1/4 px-2.5 text-xl border border-gray-400 focus:outline-none mb-6"
       />
 
-      <label class="block text-gray-500 font-bold">Address</label>
-      <input
-        v-model="organizer.address"
-        type="text"
-        placeholder="Address"
-        class="h-13 w-1/4 px-2.5 text-xl border border-gray-400 focus:outline-none mb-6"
-      />
-
-      <!-- ADDED -->
       <h3>The image of the Organizer</h3>
       <ImageUpload v-model="images" />
 
