@@ -23,4 +23,16 @@ export default {
   getEventsByKeyword(keyword: string, perPage: number, page: number) {
     return apiClient.get('/events?title=' + keyword + '&_limit=' + perPage + '&_page=' + page)
   },
+  getEventImages(images: string[]) {
+    return Promise.all(
+      images.map((image) =>
+        apiClient
+          .get<string>('/presignedUrl', {
+            params: { fileName: image },
+            responseType: 'text',
+          })
+          .then((response) => response.data),
+      ),
+    )
+  },
 }
