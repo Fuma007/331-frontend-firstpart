@@ -11,11 +11,16 @@ export interface Event {
   images: string[]
 }
 
+export interface OrganizerOwnEvent {
+  id: number
+  title: string
+}
+
 export interface Organizer {
   id: number | null
-  organizerName: string
-  address: string
+  name: string
   image?: string
+  ownEvents?: OrganizerOwnEvent[]
 }
 
 export interface MessageState {
