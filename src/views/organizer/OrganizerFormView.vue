@@ -8,9 +8,9 @@ import ImageUpload from '@/components/ImageUpload.vue' // ADDED
 
 const organizer = ref<Organizer>({
   id: null,
-  organizationName: '',
+  organizerName: '',
   address: '',
-  image: '', // ADDED
+  image: '',
 })
 
 // ADDED: the uploader works with an array, but the organizer keeps only 1 image
@@ -50,7 +50,7 @@ function saveOrganizer() {
     <form @submit.prevent="saveOrganizer">
       <label class="block text-gray-500 font-bold">Organization name</label>
       <input
-        v-model="organizer.organizationName"
+        v-model="organizer.organizerName"
         type="text"
         placeholder="Organization name"
         class="h-13 w-1/4 px-2.5 text-xl border border-gray-400 focus:outline-none mb-6"

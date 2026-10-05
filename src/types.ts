@@ -13,7 +13,7 @@ export interface Event {
 
 export interface Organizer {
   id: number | null
-  organizationName: string
+  organizerName: string
   address: string
   image?: string
 }
