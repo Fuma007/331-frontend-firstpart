@@ -9,6 +9,8 @@ interface UploadMedia {
   type?: string
 }
 
+const props = defineProps<{ max?: number }>()
+
 const modelValue = defineModel<string[]>({
   default: () => [],
 })
@@ -38,5 +40,5 @@ const onChanged = (files: UploadMedia[]): void => {
 </script>
 
 <template>
-  <Uploader :server="uploadUrl" @change="onChanged" :media="media"></Uploader>
+  <Uploader :server="uploadUrl" :max="props.max" @change="onChanged" :media="media"></Uploader>
 </template>
