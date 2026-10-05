@@ -1,13 +1,20 @@
-export interface Bid {
+export interface Event {
   id: number
-  amount: number
-  datetime: string
+  category: string
+  title: string
+  description: string
+  location: string
+  date: string
+  time: string
+  petsAllowed: boolean
+  organizer: string
+  images: string[]
 }
 
-export interface AuctionItem {
-  id: number | null
-  description: string
-  type: string
-  bids: Bid[]
-  successfulBid: Bid | null
+export interface MessageState {
+  message: string
+}
+
+export interface EventState {
+  event: Event | null
 }
